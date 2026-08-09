@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+server/node_modules/
+
+# Environment (KHÔNG đẩy secret)
+.env
+.env.local
+server/.env
+.runtime/
+
+# Báo cáo / tài liệu (không cần deploy)
+report-assets/
+_docx_extract/
+*.md
+!DEPLOY.md
+*.docx
+*.bak
+anh-giao-dien/
+so-do/
+CLAUDE.md
+
+# Mobile app (bản riêng, không deploy cùng)
+CINEFILM-Mobile.html
+mobile-app.jsx
+mobile-booking.jsx
+mobile-extra.jsx
+mobile-home.jsx
+mobile.css
+ios-frame.jsx
+
+# Dev / scripts
+dev-server.js
+server/scripts/
+!server/scripts/
+server/scripts/*
+!server/scripts/migrate-google-auth.js
+api-spec.html
+
+# Misc
+ảnh*
+.thumbnail
+loading.mp4
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db

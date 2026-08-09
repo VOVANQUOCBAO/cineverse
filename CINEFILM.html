@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0c0f" />
+  <meta name="description" content="CINEVERSE — xem lịch chiếu, trailer và đặt vé xem phim trực tuyến." />
+  <meta property="og:title" content="CINEVERSE — Đặt vé xem phim" />
+  <meta property="og:description" content="Khám phá phim đang chiếu, chọn suất và đặt ghế trực tuyến." />
+  <meta property="og:type" content="website" />
+  <title>CINEVERSE — Đặt vé xem phim</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    /* Token-aware resource loader: preview serving requires ?t=<token>
+       on subresources when session cookies are unavailable. */
+    var __T = new URLSearchParams(location.search).get("t");
+    function withT(u) { return __T ? u + (u.indexOf("?") >= 0 ? "&" : "?") + "t=" + encodeURIComponent(__T) : u; }
+    window.__withT = withT;
+    document.write('<link rel="stylesheet" href="' + withT("styles.css") + '">');
+  </script>
+  <style>
+    /* Admin-specific additions */
+    .admin-table-row:hover { background: var(--surface) !important; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#root">Bỏ qua đến nội dung chính</a>
+  <div id="root" tabindex="-1">
+    <div style="min-height:100vh;display:grid;place-items:center;">
+      <div class="spin"></div>
+    </div>
+  </div>
+
+  <!-- External libs -->
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- React + Babel -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- Data layer + UI scripts — token-aware loader, ORDER MATTERS -->
+  <script>
+    ["api.js", "data.js", "admin-data.js", "persistence.js"].forEach(function (f) {
+      document.write('<script src="' + withT(f) + '"><\/script>');
+    });
+    /* patch poster image paths with token so <img> requests authorize */
+    document.write('<script>if(window.CINE&&window.CINE.movies){window.CINE.movies.forEach(function(m){if(m.poster&&m.poster.indexOf("?t=")<0){m.poster=window.__withT(m.poster);}});}<\/script>');
+    ["ui.jsx", "auth.jsx", "charts.jsx", "screens.jsx", "booking.jsx", "admin-screens.jsx", "admin-crm.jsx", "staff-screens.jsx", "app.jsx"].forEach(function (f) {
+      document.write('<script type="text/babel" src="' + withT(f) + '"><\/script>');
+    });
+  </script>
+</body>
+</html>
