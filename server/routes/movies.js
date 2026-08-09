@@ -6,6 +6,7 @@
 const router = require("express").Router();
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
 const multer = require("multer");
 const { pool } = require("../db");
 const { asyncHandler, ApiError } = require("../utils/http");
@@ -15,8 +16,10 @@ const { mid, rvid, parseId } = require("../utils/ids");
 const SEP = "||";
 const split = (s) => (s ? s.split(SEP) : []);
 
-// ─── Multer: upload poster vào D:\web\uploads ───
-const UPLOAD_DIR = path.join(__dirname, "..", "..", "uploads");
+// Vercel chỉ cho phép ghi tạm trong /tmp; local vẫn dùng thư mục uploads của dự án.
+const UPLOAD_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), "cineverse-uploads")
+  : path.join(__dirname, "..", "..", "uploads");
 if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 const upload = multer({
   storage: multer.diskStorage({

@@ -1,0 +1,13 @@
+.git/
+.vercel/
+.runtime/
+node_modules/
+server/node_modules/
+server/.env
+.env.local
+*.docx
+*.bak
+anh-giao-dien/
+so-do/
+report-assets/
+_docx_extract/
