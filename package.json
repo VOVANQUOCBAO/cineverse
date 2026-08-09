@@ -6,7 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server/index.js",
-    "migrate:google": "node server/scripts/migrate-google-auth.js"
+    "migrate:google": "node server/scripts/migrate-google-auth.js",
+    "bootstrap:tidb": "node scripts/bootstrap-tidb.js"
   },
   "engines": {
     "node": ">=20"
